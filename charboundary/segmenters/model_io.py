@@ -12,6 +12,7 @@ from skops.io import dump, load
 from charboundary.constants import DEFAULT_ABBREVIATIONS
 from charboundary.encoders import CharacterEncoder
 from charboundary.features import FeatureExtractor
+import fickling
 
 if TYPE_CHECKING:
     from charboundary.segmenters.base import TextSegmenter
@@ -289,10 +290,10 @@ class ModelIO:
                         import lzma
 
                         with lzma.open(try_path, "rb") as f:
-                            data = pickle.load(f)
+                            data = fickling.load(f)
                     else:
                         with open(try_path, "rb") as f:
-                            data = pickle.load(f)
+                            data = fickling.load(f)
 
                 # If we reach here, we successfully loaded the data
                 break
@@ -323,11 +324,11 @@ class ModelIO:
                         import lzma
 
                         with lzma.open(try_path, "rb") as f:
-                            data = pickle.load(f)
+                            data = fickling.load(f)
                     else:
                         # Regular file
                         with open(try_path, "rb") as f:
-                            data = pickle.load(f)
+                            data = fickling.load(f)
                     break
                 except Exception as e:
                     last_exception = e

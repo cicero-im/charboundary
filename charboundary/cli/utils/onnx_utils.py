@@ -12,6 +12,7 @@ import time
 import random
 import warnings
 from typing import List, Dict, Any, Tuple, Optional
+import fickling
 
 # Check if ONNX is available
 try:
@@ -247,16 +248,14 @@ def convert_custom_model(
         print("Trying to load as raw model...")
 
         try:
-            # Try to use pickle loading for standalone models
-            import pickle
             import lzma
 
             if input_path.endswith(".xz"):
                 with lzma.open(input_path, "rb") as f:
-                    model = pickle.load(f)
+                    model = fickling.load(f)
             else:
                 with open(input_path, "rb") as f:
-                    model = pickle.load(f)
+                    model = fickling.load(f)
 
             print("Successfully loaded raw model.")
         except Exception as e:
