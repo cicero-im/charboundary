@@ -9,9 +9,9 @@ This module provides functions for the management of ONNX models:
 
 import os
 import time
-import random
 import warnings
 from typing import List, Dict, Any, Tuple, Optional
+import secrets
 
 # Check if ONNX is available
 try:
@@ -377,7 +377,7 @@ def generate_benchmark_data(feature_count: int, batch_size: int) -> List[List[in
     """Generate random benchmark data for testing."""
     # Create random binary features (typical for charboundary)
     return [
-        [random.randint(0, 1) for _ in range(feature_count)] for _ in range(batch_size)
+        [secrets.SystemRandom().randint(0, 1) for _ in range(feature_count)] for _ in range(batch_size)
     ]
 
 

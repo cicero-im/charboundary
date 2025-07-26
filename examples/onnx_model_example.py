@@ -8,10 +8,10 @@ This example demonstrates how to:
 
 import os
 import sys
-import random
 import tempfile
 from pathlib import Path
 import time
+import secrets
 
 # Add the parent directory to the path to import charboundary
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -39,10 +39,10 @@ def generate_dummy_data(num_samples=1000, feature_dim=20):
     
     for _ in range(num_samples):
         # Create random feature vector
-        features = [random.randint(0, 1) for _ in range(feature_dim)]
+        features = [secrets.SystemRandom().randint(0, 1) for _ in range(feature_dim)]
         
         # Random label (more 0s than 1s to simulate imbalanced data)
-        label = 1 if random.random() < 0.2 else 0
+        label = 1 if secrets.SystemRandom().random() < 0.2 else 0
         
         X.append(features)
         y.append(label)

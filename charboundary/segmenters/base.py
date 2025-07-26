@@ -4,7 +4,6 @@ Base text segmentation functionality for the charboundary library.
 
 import gzip
 import json
-import random
 from functools import lru_cache
 from typing import List, Dict, Any, Optional, Union, Iterator, Tuple, ClassVar
 
@@ -30,6 +29,7 @@ from charboundary.segmenters.sentences import SentenceSegmenter
 from charboundary.segmenters.paragraphs import ParagraphSegmenter
 from charboundary.segmenters.spans import SpanHandler
 from charboundary.segmenters.evaluation import Evaluator
+import secrets
 
 # Segmentation tuning parameters
 PATTERN_CONFIDENCE_THRESHOLD = 0.8  # Confidence threshold for pattern matching
@@ -384,7 +384,7 @@ class TextSegmenter:
             )
 
             # Use modern Python 3.11 pattern matching for cleaner code
-            match (label, is_terminal, random.random() < sample_rate):
+            match (label, is_terminal, secrets.SystemRandom().random() < sample_rate):
                 case (1, _, _):  # Always include positive samples (boundaries)
                     features.append(feature_vec)
                     labels.append(label)
